@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Header */
+        header{
+            background:#1f2933;
+            color:white;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:15px 40px;
+        }
+
+        header nav a{
+            color:white;
+            text-decoration:none;
+            margin-left:20px;
+        }
+
+        header nav a:hover{
+            text-decoration:underline;
+        }
+
+        /* About Section */
+        .about{
+            padding:60px 20px;
+            background:#f3f4f6;
+        }
+
+        .about-box{
+            max-width:900px;
+            margin:auto;
+            background:white;
+            padding:40px;
+            border-radius:12px;
+            box-shadow:0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .about-box h1{
+            text-align:center;
+            margin-bottom:20px;
+            color:#1f2933;
+        }
+
+        .about-box p{
+            line-height:1.8;
+            margin-bottom:15px;
+            color:#374151;
+        }
+
+        .values{
+            display:flex;
+            gap:20px;
+            margin-top:30px;
+        }
+
+        .value-card{
+            flex:1;
+            background:#eef2ff;
+            padding:20px;
+            border-radius:10px;
+            text-align:center;
+        }
+
+        .value-card h3{
+            margin-bottom:10px;
+            color:#4338ca;
+        }
+
+        /* Footer */
+        footer{
+            background:#1f2933;
+            color:white;
+            text-align:center;
+            padding:15px;
+            margin-top:40px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h2>MyWebsite</h2>
+        <nav>
+            <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <a href="/Services">Services</a>
+            <a href="/contact">Contact</a>
+        </nav>
+        </nav>
+    </header>
+
+    <section class="about">
+        <div class="about-box">
+            <h1>About Us</h1>
+
+            <p>
+                Welcome to MyWebsite. We are passionate about creating simple,
+                clean and user-friendly websites using HTML and CSS.
+            </p>
+
+            <p>
+                Our goal is to help beginners understand web development easily
+                and build beautiful websites with confidence.
+            </p>
+
+            <div class="values">
+                <div class="value-card">
+                    <h3>Our Mission</h3>
+                    <p>To make web development simple and accessible.</p>
+                </div>
+
+                <div class="value-card">
+                    <h3>Our Vision</h3>
+                    <p>Empower beginners to become confident developers.</p>
+                </div>
+
+                <div class="value-card">
+                    <h3>Our Values</h3>
+                    <p>Quality, simplicity and consistency.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>© 2026 MyWebsite | About Page</p>
+    </footer>
+
+</body>
+</html>
