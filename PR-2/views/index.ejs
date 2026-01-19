@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>To-Do List</title>
+
+    <style>
+        /* RESET & GLOBAL */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f0f4f8;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 0;
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        /* FORM BOX */
+        .form-box {
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s;
+        }
+
+        .form-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .form-box h2 {
+            text-align: center;
+            color: #34495e;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* FORM ELEMENTS */
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 10px 5px;
+            vertical-align: middle;
+        }
+
+        input[type="number"],
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            outline: none;
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+
+        input[type="number"]:focus,
+        input[type="text"]:focus,
+        select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background: #3498db;
+            color: white;
+            font-weight: 600;
+            font-size: 15px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        input[type="submit"]:hover {
+            background: #2980b9;
+            transform: translateY(-2px);
+        }
+
+        /* TASK LIST BOX */
+        .table-box {
+            background: #ffffff;
+            padding: 25px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .table-box h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #34495e;
+        }
+
+        /* TASK GRID */
+        .task-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        /* TASK CARD */
+        .task-card {
+            background: linear-gradient(135deg, #ffffff, #f6f8fa);
+            padding: 18px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .task-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        /* TASK HEADER */
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .task-no {
+            font-weight: bold;
+            color: #3498db;
+        }
+
+        .priority {
+            padding: 4px 12px;
+            border-radius: 25px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: capitalize;
+        }
+
+        .priority.high {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .priority.medium {
+            background: #f1c40f;
+            color: black;
+        }
+
+        .priority.low {
+            background: #2ecc71;
+            color: white;
+        }
+
+        /* TASK TITLE & DESCRIPTION */
+        .task-card h3 {
+            font-size: 16px;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .task-card p {
+            font-size: 14px;
+            color: #555;
+            max-height: 120px;
+            overflow-y: auto;
+            margin-bottom: 12px;
+        }
+
+        /* TASK ACTIONS */
+        .task-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .task-actions a {
+            text-decoration: none;
+            padding: 7px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .task-actions .edit {
+            background: #f39c12;
+            color: #000;
+        }
+
+        .task-actions .delete {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .task-actions a:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="form-box">
+            <h2>Add Task</h2>
+
+            <form action="/add-task" method="post">
+                <table>
+                    <tr>
+                        <td>No</td>
+                        <td><input type="number" name="no" placeholder="Task No"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Task Name</td>
+                        <td><input type="text" name="tname" placeholder="Task Name"></td>
+                    </tr>
+
+                    <tr>
+                        <td>Priority</td>
+                        <td>
+                            <select name="tprio">
+                                <option value="">--- Select Priority ---</option>
+                                <option value="high">High</option>
+                                <option value="medium">Medium</option>
+                                <option value="low">Low</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" value="Add Task">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+        <div class="table-box">
+            <h2>Task List</h2>
+
+            <div class="task-container">
+                <% tasks.forEach(task=> { %>
+                    <div class="task-card">
+
+                        <div class="task-header">
+                            <span class="task-no">#<%= task.no %></span>
+
+                            <span class="priority <%= task.tprio %>">
+                                <%= task.tprio || 'none' %>
+                            </span>
+                        </div>
+
+                        <h3>
+                            <%= task.tname %>
+                        </h3>
+
+                        <p>
+                            <%= task.tdes %>
+                        </p>
+
+                        <div class="task-actions">
+                            <a href="/edit-task/<%= task.no %>" class="edit">Edit</a>
+                            <a href="/delete-task/<%= task.no %>" class="delete">Delete</a>
+                        </div>
+
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+
+    </div>
