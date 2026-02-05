@@ -4,7 +4,9 @@ const path = require('path');
 
 exports.index = async (req, res) => {
     try {
-        let books = await Book.find();
+        const books = await Book.find();
+
+
         return res.render('index', { books });
     } catch (error) {
         console.log(error);
