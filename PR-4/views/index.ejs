@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f7fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            margin: 0 0 20px 0;
+            letter-spacing: 1px;
+        }
+
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 350px;
+            margin-bottom: 30px;
+        }
+
+        form table {
+            width: 100%;
+        }
+
+        form td {
+            padding: 8px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            outline: none;
+            transition: 0.2s;
+        }
+
+        input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.4);
+        }
+
+        input[type="submit"] {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        input[type="submit"]:hover {
+            background: #2980b9;
+        }
+
+        table[border="1"] {
+            border-collapse: collapse;
+            background: white;
+            width: 90%;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: #34495e;
+            color: white;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #f2f6fa;
+        }
+
+        tbody tr:hover {
+            background: #eaf3ff;
+            transition: 0.2s;
+        }
+
+        img {
+            border-radius: 8px;
+            object-fit: cover;
+        }
+
+        a {
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        a[href*="edit"] {
+            background: #27ae60;
+            color: white;
+        }
+
+        a[href*="delete"] {
+            background: #e74c3c;
+            color: white;
+        }
+
+        a:hover {
+            opacity: 0.85;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: #ddd;
+            margin: 30px 0;
+            width: 90%;
+        }
+    </style>
+
+</head>
+
+<body>
+    <center>
+        <h2>Book Store</h2>
+        <form action="/add-book" method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <td>Title: </td>
+                    <td><input type="text" name="title"></td>
+                </tr>
+                <tr>
+                    <td>Category: </td>
+                    <td><input type="text" name="category"></td>
+                </tr>
+                <tr>
+                    <td>Pages: </td>
+                    <td><input type="number" name="pages"></td>
+                </tr>
+                <tr>
+                    <td>Price: </td>
+                    <td><input type="number" name="price"></td>
+                </tr>
+                <tr>
+                    <td>Book Image: </td>
+                    <td><input type="file" name="bookImg"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Submit"></td>
+                </tr>
+            </table>
+        </form>
+        <hr>
+        <table cellpadding="5" border="1">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>title</th>
+                    <th>category</th>
+                    <th>pages</th>
+                    <th>price</th>
+                    <th>image</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% books.forEach((book, i)=>{ %>
+                    <tr>
+                        <td>
+                            <%= i+1 %>
+                        </td>
+                        <td>
+                            <%= book.title %>
+                        </td>
+                        <td>
+                            <%= book.category %>
+                        </td>
+                        <td>
+                            <%= book.pages %>
+                        </td>
+                        <td>
+                            <%= book.price %>
+                        </td>
+                        <td><img src="<%= book.bookImg %>" width="100"></td>
+                        <td><a href="/edit-book/<%= book._id%>">Edit</a></td>
+                        <td><a href="/delete-book/<%= book._id%>">Delete</a></td>
+                    </tr>
+                    <% }) %>
+            </tbody>
+        </table>
+    </center>
+</body>
+
+</html>

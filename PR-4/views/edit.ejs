@@ -1,0 +1,39 @@
+<center>
+    <h2>Book Store</h2>
+
+    <form action="/update-book/<%= book._id %>" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<%= book._id %>">
+
+            <table>
+                <tr>
+                    <td>Title:</td>
+                    <td><input type="text" name="title" value="<%= book.title %>"></td>
+                </tr>
+
+                <tr>
+                    <td>Category:</td>
+                    <td><input type="text" name="category" value="<%= book.category %>"></td>
+                </tr>
+
+                <tr>
+                    <td>Pages:</td>
+                    <td><input type="number" name="pages" value="<%= book.pages %>"></td>
+                </tr>
+
+                <tr>
+                    <td>Price:</td>
+                    <td><input type="number" name="price" value="<%= book.price %>"></td>
+                </tr>
+
+                <tr>
+                    <td>Book Image:</td>
+                    <td><input type="file" name="bookImg"></td>
+                </tr>
+
+                <tr>
+                    <td><a href="/">Back</a></td>
+                    <td><input type="submit" value="Update Book"></td>
+                </tr>
+            </table>
+    </form>
+</center>
