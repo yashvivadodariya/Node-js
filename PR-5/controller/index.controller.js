@@ -1,101 +1,65 @@
-const movie = require('../model/movie.model');
+const Movie = require('../model/movie.model');
 const fs = require('fs');
 const path = require('path');
 
 exports.index = async (req, res) => {
-    try {
-        const movies = await movie.find();
-        return res.render('index', { movies });
-    } catch (error) {
-        console.log(error);
-        return res.redirect('/');
-    }
+    const movies = await Movie.find();
+    res.render('index', { movies });
+};
+
+exports.movielist = async (req, res) => {
+    const movies = await Movie.find();
+    res.render('listmovie', { movies });
 };
 
 exports.addmovie = async (req, res) => {
-    try {
-        let imagePath = req.file ? `/uploads/${req.file.filename}` : '';
+    const imagePath = req.file ? `/uploads/${req.file.filename}` : '';
 
-        await movie.create({
-            ...req.body,
-            movieImg: imagePath
-        });
+    await Movie.create({
+        ...req.body,
+        movieImg: imagePath
+    });
 
-        res.redirect('/');
-    } catch (error) {
-        console.log(error);
-        res.redirect('/');
-    }
+    res.redirect('/add');
 };
-
 
 exports.editmovie = async (req, res) => {
-    let movieData = await movie.findById(req.params.id);
-
-    if (!movieData) {
-        console.log("movie not found...");
-        return res.redirect('/');
-    }
-
-    return res.render('edit', { movie: movieData });
+    const movie = await Movie.findById(req.params.id);
+    res.render('edit', { movie });
 };
 
-
 exports.updatemovie = async (req, res) => {
-    let movieData = await movie.findById(req.params.id);
 
-    if (!movieData) {
-        console.log('movie not found...');
-        return res.redirect('/');
-    }
-
-    let imagepath;
+    const movie = await Movie.findById(req.params.id);
+    let imagepath = movie.movieImg;
 
     if (req.file) {
-        if (movieData.movieImg != "") {
-            let oldPath = path.join(__dirname, '..', movieData.movieImg);
 
-            try {
-                fs.unlinkSync(oldPath);
-            } catch {
-                console.log('file missing');
-            }
+        if (movie.movieImg) {
+            const oldPath = path.join(__dirname, '..', movie.movieImg);
+            if (fs.existsSync(oldPath)) fs.unlinkSync(oldPath);
         }
 
         imagepath = `/uploads/${req.file.filename}`;
-    } else {
-        imagepath = movieData.movieImg;
     }
 
-    await movie.findByIdAndUpdate(
-        movieData._id,
-        { ...req.body, movieImg: imagepath }
-    );
+    await Movie.findByIdAndUpdate(req.params.id, {
+        ...req.body,
+        movieImg: imagepath
+    });
 
-    res.redirect('/');
+    res.redirect('/add');
 };
 
 exports.deletemovie = async (req, res) => {
-    let id = req.params.id;
 
-    let movieData = await movie.findById(id);
+    const movie = await Movie.findById(req.params.id);
 
-    if (!movieData) {
-        console.log("movie not found...");
-        return res.redirect('/');
+    if (movie.movieImg) {
+        const imgPath = path.join(__dirname, '..', movie.movieImg);
+        if (fs.existsSync(imgPath)) fs.unlinkSync(imgPath);
     }
 
-    if (movieData.movieImg != "") {
-        let imagePath = path.join(__dirname, "..", movieData.movieImg);
-
-        try {
-            fs.unlinkSync(imagePath);
-        } catch {
-            console.log('file missing');
-        }
-    }
-
-    await movie.findByIdAndDelete(id);
-
-    res.redirect('/');
+    await Movie.findByIdAndDelete(req.params.id);
+    res.redirect('/add');
 };

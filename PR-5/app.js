@@ -8,6 +8,7 @@ dbConnect();
 app.set('view engine', 'ejs');
 app.use(express.urlencoded());
 app.use('/uploads', express.static('uploads'));
+app.use(express.static('public'));
 app.use('/', require('./routes/index.routes'));
 
 app.listen(port, () => {
