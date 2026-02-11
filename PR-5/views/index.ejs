@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui;
+            background: linear-gradient(120deg, #1e1b4b, #4a479c, #233256);
+            color: white;
+        }
+
+        .app {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px;
+        }
+
+        .app-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 40px rgba(0, 0, 0, .3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .full {
+            grid-column: 1/3;
+        }
+
+        input {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+
+        input::placeholder {
+            color: #ddd;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 10px #8b5cf6;
+        }
+
+        .primary-btn {
+            background: linear-gradient(45deg, #7c3aed, #22d3ee);
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .primary-btn:hover {
+            transform: scale(1.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        tr {
+            border-bottom: 1px solid rgba(255, 255, 255, .15);
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, .05);
+        }
+
+        img {
+            width: 60px;
+            border-radius: 8px;
+        }
+
+        .edit {
+            background: #0ea5e9;
+            padding: 6px 10px;
+            border-radius: 6px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .delete {
+            background: #ef4444;
+            padding: 6px 10px;
+            border-radius: 6px;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="app">
+
+        <h1 class="app-title">🎬 Movie Dashboard</h1>
+
+        <!-- Add Movie -->
+        <div class="glass-card">
+            <h3>Add New Movie</h3>
+
+            <form action="/add-movie" method="post" enctype="multipart/form-data" class="grid">
+
+                <input type="text" name="title" placeholder="Title" required>
+                <input type="text" name="genre" placeholder="Genre" required>
+
+                <input type="text" name="description" placeholder="Description" required>
+                <input type="number" name="duration" placeholder="Duration" required>
+
+                <input type="file" name="movieImg" class="full">
+
+                <button class="primary-btn full">Add Movie</button>
+
+            </form>
+        </div>
+
+        <!-- Movie List -->
+        <div class="glass-card">
+
+            <h3>All Movies</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Movie</th>
+                        <th>Genre</th>
+                        <th>Duration</th>
+                        <th>Poster</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <% movies.forEach((movie,i)=>{ %>
+                        <tr>
+                            <td>
+                                <%= i+1 %>
+                            </td>
+                            <td>
+                                <%= movie.title %>
+                            </td>
+                            <td>
+                                <%= movie.genre %>
+                            </td>
+                            <td>
+                                <%= movie.duration %> min
+                            </td>
+                            <td><img src="<%= movie.movieImg %>"></td>
+
+                            <td>
+                                <a href="/edit-movie/<%= movie._id%>" class="edit">Edit</a>
+                                <a href="/delete-movie/<%= movie._id%>" class="delete">Delete</a>
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+</body>
+
+</html>

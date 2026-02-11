@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Movie</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui;
+            background: linear-gradient(120deg, #1e1b4b, #4a479c, #233256);
+            color: white;
+        }
+
+        /* container */
+        .app {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        /* title */
+        .app-title {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        /* glass card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(14px);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 40px rgba(0, 0, 0, .3);
+        }
+
+        /* grid form */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .full {
+            grid-column: 1/3;
+        }
+
+        /* inputs */
+        input {
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            font-size: 14px;
+        }
+
+        input::placeholder {
+            color: #ddd;
+        }
+
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 10px #8b5cf6;
+        }
+
+        /* buttons */
+        .primary-btn {
+            background: linear-gradient(45deg, #7c3aed, #22d3ee);
+            border: none;
+            padding: 12px;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: .3s;
+        }
+
+        .primary-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-align: center;
+            background: #334155;
+            padding: 12px;
+            border-radius: 10px;
+            color: white;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .back-btn:hover {
+            background: #475569;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="app">
+
+        <h1 class="app-title">🎬 Edit Movie</h1>
+
+        <div class="glass-card">
+
+            <form action="/update-movie/<%= movie._id %>" method="post" enctype="multipart/form-data" class="grid">
+
+                <input type="text" name="title" value="<%= movie.title %>" placeholder="Title" required>
+
+                <input type="text" name="genre" value="<%= movie.genre %>" placeholder="Genre" required>
+
+                <input type="text" name="description" value="<%= movie.description %>" placeholder="Description"
+                    required>
+
+                <input type="number" name="duration" value="<%= movie.duration %>" placeholder="Duration" required>
+
+                <input type="file" name="movieImg" class="full">
+
+                <button class="primary-btn full">Update Movie</button>
+
+                <a href="/" class="back-btn full">⬅ Back to Dashboard</a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
