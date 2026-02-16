@@ -19,43 +19,42 @@
 
         <h3>All Movies</h3>
 
-        <table>
-            <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Movie</th>
-                    <th>Genre</th>
-                    <th>Duration</th>
-                    <th>Poster</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
+        <div class="movie-grid">
 
-            <tbody>
-                <% movies.forEach((movie,i)=>{ %>
-                    <tr>
-                        <td>
-                            <%= i+1 %>
-                        </td>
-                        <td>
+            <% movies.forEach((movie,i)=>{ %>
+
+                <div class="movie-card">
+
+                    <div class="poster">
+                        <img src="<%= movie.movieImg %>">
+                    </div>
+
+                    <div class="movie-info">
+                        <h4>
                             <%= movie.title %>
-                        </td>
-                        <td>
-                            <%= movie.genre %>
-                        </td>
-                        <td>
-                            <%= movie.duration %> min
-                        </td>
-                        <td><img src="<%= movie.movieImg %>"></td>
+                        </h4>
 
-                        <td>
+                        <p><strong>Genre:</strong>
+                            <%= movie.genre %>
+                        </p>
+                        <p><strong>Description:</strong>
+                            <%= movie.description %>
+                        </p>
+                        <p><strong>Duration:</strong>
+                            <%= movie.duration %> hrs
+                        </p>    
+
+                        <div class="actions">
                             <a href="/edit-movie/<%= movie._id%>" class="edit">Edit</a>
                             <a href="/delete-movie/<%= movie._id%>" class="delete">Delete</a>
-                        </td>
-                    </tr>
-                    <% }) %>
-            </tbody>
-        </table>
+                        </div>
+                    </div>
+
+                </div>
+
+                <% }) %>
+
+        </div>
 
     </div>
 </body>
