@@ -10,7 +10,7 @@ const adminSchema = mongoose.Schema({
         enum: ['male', 'female']
     },
     mobileNo: String,
-    profileimg: String
+    profileImage: String
 });
 
 module.exports = mongoose.model('Admin', adminSchema);

@@ -215,8 +215,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark pro-pic" href=""
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <% if(locals.user.profileimg !="" ){ %>
-                                    <img src='<%= user.profileimg %>' alt="user" class="rounded-circle" width="31">
+                                <% if(locals.user.profileImage !="" ){ %>
+                                    <img src='<%= user.profileImage %>' alt="user" class="rounded-circle" width="31">
                                     <% } else{ %>
                                         <img src="/assets/images/users/1.jpg" alt="user" class="rounded-circle"
                                             width="31">
@@ -285,6 +285,47 @@
                                 <li class="sidebar-item"><a href="/blog/view-blog" class="sidebar-link"><i
                                             class="mdi mdi-note-plus"></i><span class="hide-menu"> View Blogs
                                         </span></a></li>
+                            </ul>
+                        </li>
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">Category </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="/category/add-category" class="sidebar-link"><i
+                                            class="mdi mdi-note-outline"></i><span class="hide-menu"> Add Category
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="/category/view-category" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> View Categories
+                                        </span></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">Subcategories </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="/subcategory/add-subcategory" class="sidebar-link"><i
+                                            class="mdi mdi-note-outline"></i><span class="hide-menu"> Add Subcategory
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="/subcategory/view-subcategory" class="sidebar-link"><i
+                                            class="mdi mdi-note-plus"></i><span class="hide-menu"> View Subcategories
+                                        </span></a></li>
+                            </ul>
+                        </li>
+
+                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                href="javascript:void(0)" aria-expanded="false"><i class="mdi mdi-receipt"></i><span
+                                    class="hide-menu">Extracategories </span></a>
+                            <ul aria-expanded="false" class="collapse  first-level">
+                                <li class="sidebar-item"><a href="/extracategory/add-extracategory"
+                                        class="sidebar-link"><i class="mdi mdi-note-outline"></i><span
+                                            class="hide-menu"> Add Extracategory
+                                        </span></a></li>
+                                <li class="sidebar-item"><a href="/extracategory/view-extracategory"
+                                        class="sidebar-link"><i class="mdi mdi-note-plus"></i><span class="hide-menu">
+                                            View Extracategories
+                                        </span></a>
+                                </li>
                             </ul>
                         </li>
                     </ul>

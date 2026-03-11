@@ -13,5 +13,8 @@ routes.get('/logout', logout);
 
 routes.use('/admin', require('./admin.routes'));
 routes.use('/blog', require('./blog.routes'));
+routes.use('/category', require('./category.routes'));
+routes.use('/subcategory', require('./subCategory.routes'));
+routes.use('/extracategory', require('./extraCategory.routes'));
 
 module.exports = routes;
