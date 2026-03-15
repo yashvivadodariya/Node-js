@@ -32,6 +32,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticate);
 app.use('/', require('./routes/index.routes.js'));
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+});
 
 app.listen(port, () => {
     console.log(`Server start at http://localhost:${8000}`);

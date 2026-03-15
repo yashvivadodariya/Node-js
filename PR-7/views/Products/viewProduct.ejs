@@ -25,42 +25,54 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Contact No</th>
-                                    <th scope="col">Profile Image</th>
-                                    <th scope="col">Actions</th>
+                                    <th>#</th>
+                                    <th>Product Name</th>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th>Category</th>
+                                    <th>SubCategory</th>
+                                    <th>ExtraCategory</th>
+                                    <th>Image</th>
+                                    <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <% admins.forEach((admin, i)=>{ %>
+                                <% products.forEach((prod, i)=>{ %>
                                     <tr>
                                         <th scope="row">
                                             <%= i+1 %>
                                         </th>
                                         <td>
-                                            <%= admin.firstname %>
+                                            <%= prod.prodName %>
                                         </td>
                                         <td>
-                                            <%= admin.lastname %>
+                                            <%= prod.prodDes %>
                                         </td>
                                         <td>
-                                            <%= admin.email %>
+                                            <%= prod.prodPrice %>
                                         </td>
                                         <td>
-                                            <%= admin.gender %>
+                                            <%= prod.categoryId ? prod.categoryId.categoryName : "-" %>
+                                        </td>
+
+                                        <td>
+                                            <%= prod.subCategoryId ? prod.subCategoryId.subCategoryName : "-" %>
+                                        </td>
+
+                                        <td>
+                                            <%= prod.extracategoryId ? prod.extracategoryId.extraCategoryName : "-" %>
                                         </td>
                                         <td>
-                                            <%= admin.mobileNo %>
+                                            <% if (prod.prodImg) { %>
+                                                <img src="<%= prod.prodImg %>" width="60">
+                                                <% } else { %>
+                                                    No Image
+                                                    <% } %>
                                         </td>
-                                        <td><img src="<%= admin.profileImage %>" width="60" alt=""></td>
                                         <td>
-                                            <a href="/admin/edit-admin/<%= admin._id %>"
+                                            <a href="/products/edit-product/<%= prod._id %>"
                                                 class="btn btn-warning">EDIT</a>
-                                            <a href="/admin/delete-admin/<%= admin._id %>"
+                                            <a href="/products/delete-product/<%= prod._id %>"
                                                 class="btn btn-danger">DELETE</a>
                                         </td>
                                     </tr>

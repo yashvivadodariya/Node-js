@@ -19,9 +19,9 @@ exports.addAdmin = async (req, res) => {
         let admin = await Admin.create({
             ...req.body,
             password: hashPass,
-            profileimg: imgPath
+            profileImage: imgPath
         });
-        return res.redirect("/admin/add-admin");
+        return res.redirect("/admin/view-admin");
     } catch (error) {
         console.log(error);
         return res.redirect("/");
@@ -39,25 +39,32 @@ exports.viewAllAdmin = async (req, res) => {
 }
 
 exports.deleteAdmin = async (req, res) => {
-    let id = req.params.id;
-    let admin = await Admin.findById(id);
+    try {
+        let id = req.params.id;
+        let admin = await Admin.findById(id);
 
-    if (!admin) {
-        console.log("Admin not found..");
-        return res.redirect('/');
-    }
-
-    if (admin.profileimg != "") {
-        let imgpath = path.join(__dirname, "..", admin.profileimg);
-        try {
-            fs.unlinkSync(imgpath);
-        } catch (error) {
-            console.log('Something is missing');
+        if (!admin) {
+            console.log("Admin not found..");
+            return res.redirect('/');
         }
-    }
 
-    await Admin.findByIdAndDelete(id);
-    return res.redirect('/admin/view-admin');
+        if (admin.profileImage) {
+            let imgpath = path.join(__dirname, "..", admin.profileImage);
+            try {
+                if (fs.existsSync(imgpath)) {
+                    fs.unlinkSync(imgpath);
+                }
+            } catch (error) {
+                console.log('Something is missing');
+            }
+        }
+
+        await Admin.findByIdAndDelete(id);
+        return res.redirect('/admin/view-admin');
+    } catch (error) {
+        console.log(error);
+        return res.redirect('/');
+    } 
 }
 
 exports.editAdmin = async (req, res) => {
@@ -90,8 +97,8 @@ exports.updateAdmin = async (req, res) => {
 
         if (req.file) {
 
-            if (admin.profileimg) {
-                const imgPath = path.join(__dirname, "..", admin.profileimg);
+            if (admin.profileImage) {
+                const imgPath = path.join(__dirname, "..", admin.profileImage);
                 try {
                     fs.unlinkSync(imgPath);
                 } catch (err) {
@@ -99,7 +106,7 @@ exports.updateAdmin = async (req, res) => {
                 }
             }
 
-            updateData.profileimg = `/uploads/${req.file.filename}`;
+            updateData.profileImage = `/uploads/${req.file.filename}`;
         }
 
         if (req.body.password?.trim()) {

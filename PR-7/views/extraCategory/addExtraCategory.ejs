@@ -42,8 +42,8 @@
                                     <label for="fname" class="col-sm-3 text-right control-label col-form-label">Category
                                         Name</label>
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="categoryId">
-                                            <option value="">---selct category---</option>
+                                        <select class="form-control" id="categoryId" name="categoryId">
+                                            <option value="">SELECT CATEGORY</option>
                                             <% categories.forEach((cat, i)=> { %>
                                                 <option value="<%= cat._id %>">
                                                     <%= cat.categoryName %>
@@ -59,16 +59,8 @@
                                     </label>
 
                                     <div class="col-sm-9">
-                                        <select class="form-control" name="subCategoryId">
-
-                                            <option value="">---select subcategory---</option>
-
-                                            <% subcategories.forEach(sub=> { %>
-                                                <option value="<%= sub._id %>">
-                                                    <%= sub.subCategoryName %>
-                                                </option>
-                                                <% }) %>
-
+                                        <select class="form-control" name="subCategoryId" id="subCategoryId">
+                                            <option value="">SELECT SUBCATEGORY</option>
                                         </select>
                                     </div>
                                 </div>
@@ -111,3 +103,25 @@
         <!-- End Container fluid  -->
         <!-- ============================================================== -->
         <%- include('../footer') %>
+
+            <script>
+                let categoryId = document.querySelector('#categoryId');
+                let subCategoryId = document.querySelector('#subCategoryId');
+
+                categoryId.addEventListener('change', () => {
+                    let category = categoryId.value;
+
+                    fetch(`/extracategory/subcategory?categoryId=${category}`)
+                        .then(res => res.json())
+                        .then(data => {
+                            subCategoryId.innerHTML = `<option value="">---select subcategory---</option>`;
+                            data.forEach(subCat => {
+                                let option = document.createElement('option');
+                                option.innerHTML = subCat.subCategoryName;
+                                option.setAttribute('Value', subCat._id);
+                                subCategoryId.append(option);
+                            })
+                        })
+                        .catch(err => console.log(err));
+                })
+            </script>

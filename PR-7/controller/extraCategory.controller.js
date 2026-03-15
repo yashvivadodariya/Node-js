@@ -2,13 +2,33 @@ const Category = require('../model/category.model');
 const SubCategory = require('../model/subCategory.model');
 const ExtraCategory = require('../model/extraCategory.model');
 
+exports.getExtracategory = async (req, res) => {
+    try {
+        const { subCategoryId } = req.query;
+        const extraCategories = await ExtraCategory.find({ subCategoryId: subCategoryId });
+        res.json(extraCategories);
+
+    } catch (error) {
+        console.log(error);
+        res.json('/');
+    }
+};
+
+exports.subCategories = async (req, res) => {
+    try {
+        let subcategories = await SubCategory.find({ categoryId: req.query.categoryId });
+        return res.json(subcategories);
+    } catch (error) {
+        console.log(error);
+        res.json('/');
+    }
+}
 
 exports.addExtraCategoryPage = async (req, res) => {
     try {
         const categories = await Category.find();
-        const subcategories = await SubCategory.find();
 
-        res.render('extracategory/addExtraCategory', { categories, subcategories });
+        res.render('extracategory/addExtraCategory', { categories });
     } catch (error) {
         console.log(error);
         res.redirect('/');
