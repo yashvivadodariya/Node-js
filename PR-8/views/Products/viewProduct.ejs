@@ -1,0 +1,94 @@
+```ejs
+<%- include('../header') %>
+
+    <div class="page-wrapper">
+
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">Products</h4>
+
+                    <div class="ml-auto text-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Products</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <% products.forEach((prod,i)=>{ %>
+
+                    <div class="col-md-3 mb-4">
+
+                        <div class="card shadow-lg h-100">
+
+                            <% if (prod.prodImg) { %>
+                                <img src="<%= prod.prodImg %>" class="card-img-top"
+                                    style="height:200px; object-fit:cover;">
+                                <% } else { %>
+                                    <img src="https://via.placeholder.com/200" class="card-img-top">
+                                    <% } %>
+
+                                        <div class="card-body">
+
+                                            <h5 class="card-title">
+                                                <%= prod.prodName %>
+                                            </h5>
+
+                                            <p class="text-muted">
+                                                <%= prod.prodDes %>
+                                            </p>
+
+                                            <h6 class="text-success">
+                                                ₹ <%= prod.prodPrice %>
+                                            </h6>
+
+                                            <p class="mb-1">
+                                                <b>Category:</b>
+                                                <%= prod.categoryId ? prod.categoryId.categoryName : "-" %>
+                                            </p>
+
+                                            <p class="mb-1">
+                                                <b>SubCategory:</b>
+                                                <%= prod.subCategoryId ? prod.subCategoryId.subCategoryName : "-" %>
+                                            </p>
+
+                                            <p class="mb-2">
+                                                <b>ExtraCategory:</b>
+                                                <%= prod.extracategoryId ? prod.extracategoryId.extraCategoryName : "-"
+                                                    %>
+                                            </p>
+
+                                            <a href="/products/edit-product/<%= prod._id %>"
+                                                class="btn btn-warning btn-sm">
+                                                Edit
+                                            </a>
+
+                                            <a href="/products/delete-product/<%= prod._id %>"
+                                                class="btn btn-danger btn-sm">
+                                                Delete
+                                            </a>
+
+                                        </div>
+                        </div>
+
+                    </div>
+
+                    <% }) %>
+
+            </div>
+        </div>
+
+    </div>
+
+    <%- include('../footer') %>
+        ```

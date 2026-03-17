@@ -4,6 +4,7 @@ const extraCategorySchema = mongoose.Schema({
     subCategoryId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'SubCategory',
+        required: true
     },
     extraCategoryName: String
 });
