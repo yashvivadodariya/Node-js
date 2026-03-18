@@ -41,25 +41,33 @@ exports.viewCategory = async (req, res) => {
 exports.deleteCategory = async (req, res) => {
     try {
         let category = await Category.findById(req.params.id);
+
         if (category.categoryImg != "") {
             let imgpath = path.join(__dirname, "..", category.categoryImg);
             try {
                 fs.unlinkSync(imgpath);
             } catch (error) {
-                console.log('Something is missing');
+                console.log('Image not found');
             }
         }
 
-        await Category.findByIdAndDelete(req.params.id);
+        let subcategories = await Subcategory.find({ categoryId: req.params.id });
+
+        let subIds = subcategories.map(sub => sub._id);
+
+        await ExtraCategory.deleteMany({ subCategoryId: { $in: subIds } });
+
         await Subcategory.deleteMany({ categoryId: req.params.id });
-        await ExtraCategory.deleteMany({ categoryId: req.params.id });
+
+        await Category.findByIdAndDelete(req.params.id);
+
         return res.redirect("/category/view-category");
+
     } catch (error) {
         console.log(error);
         return res.redirect("/");
     }
 };
-
 exports.editCategory = async (req, res) => {
     try {
         let category = await Category.findById(req.params.id);

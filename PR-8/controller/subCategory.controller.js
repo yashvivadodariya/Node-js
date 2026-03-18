@@ -31,7 +31,6 @@ exports.viewSubcategory = async (req, res) => {
         return res.redirect('/');
     }
 };
-
 exports.deleteSubcategory = async (req, res) => {
     try {
         let subCat = await SubCategory.findById(req.params.id);
@@ -40,8 +39,13 @@ exports.deleteSubcategory = async (req, res) => {
             console.log("SubCategory not found..");
             return res.redirect('/');
         }
+
+        await ExtraCategory.deleteMany({ subCategoryId: req.params.id });
+
         await SubCategory.findByIdAndDelete(req.params.id);
+
         return res.redirect('/subcategory/view-subcategory');
+
     } catch (error) {
         console.log(error);
         return res.redirect('/');
