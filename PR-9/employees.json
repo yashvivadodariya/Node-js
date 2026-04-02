@@ -1,0 +1,43 @@
+[
+  {
+    "_id": "69cbac07c75c7bc193b6f74f",
+    "firstName": "Reema",
+    "lastName": "Patel",
+    "email": "reemapatel8189@gmail.com",
+    "password": "123456",
+    "gender": "female",
+    "position": "developer",
+    "mobileNo": "1234567890",
+    "role": "employee",
+    "isDelete": false,
+    "__v": 0
+  },
+  {
+    "_id": "69cbb4d8f092eab0043adf20",
+    "firstName": "Shreya",
+    "lastName": "Pal",
+    "email": "shreyapal041@gmail.com",
+    "password": "$2b$10$nZmxkAGei2/dWWXbNeZPq./Bj5.TAxZkCBZEmk152NHv6A0d9F2du",
+    "gender": "female",
+    "position": "Super Developer 0.31602239165547663",
+    "mobileNo": "1234567890",
+    "profileImage": "1774957784744.png",
+    "role": "employee",
+    "isDelete": false,
+    "__v": 0
+  },
+  {
+    "_id": "69cbb5f6f092eab0043adf28",
+    "firstName": "Yashvi",
+    "lastName": "vadodariya",
+    "email": "yashvivadodariya72@gmail.com",
+    "password": "$2b$10$BHTdQ9K.AoJwH58j1gIiHeMlTsFSFGpPFYhQWEkAejoyfQyPZwoGO",
+    "gender": "female",
+    "position": "developer",
+    "mobileNo": "1234567890",
+    "profileImage": "1774958070134.png",
+    "role": "employee",
+    "isDelete": false,
+    "__v": 0
+  }
+]
