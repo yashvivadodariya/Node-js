@@ -1,0 +1,41 @@
+# Task API
+
+Aa Node.js, Express ane MongoDB thi banavel simple Task Management API che.
+
+User register ane login kari shake che. Login pachi token male che ane tena thi user task add, get ane delete kari shake che.
+
+---
+
+## Run Project
+
+npm install  
+npm start  
+
+---
+
+## Env
+
+PORT=5000  
+MONGO_URL=your_mongo_url  
+JWT_SECRET=your_secret  
+
+---
+
+## API
+
+POST /api/user/register  
+POST /api/user/login  
+
+POST /api/task/add  
+GET /api/task  
+DELETE /api/task/:id  
+
+---
+
+## Header (Token)
+Authorization: Bearer <token>
+
+---
+
+## Author
+Yashvi
